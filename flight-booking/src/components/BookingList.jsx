@@ -6,7 +6,14 @@ import { removeFlight } from "../redux/flight/actions";
 const BookingList = () => {
   const flights = useSelector((state) => state);
   const dispatch = useDispatch();
-  console.log(flights);
+  const dateFormate = (flightDate) => {
+    const date = new Date(flightDate);
+    const day = date.getDate().toString().padStart(2, "0");
+    const month = (date.getMonth() + 1).toString().padStart(2, "0");
+    const year = date.getFullYear().toString().substr(-2);
+
+    return `${day}-${month}-${year}`;
+  };
   return (
     <div className="table-container">
       <table className="booking-table">
@@ -21,9 +28,9 @@ const BookingList = () => {
           </tr>
         </thead>
         <tbody className="divide-y divide-gray-300/20" id="lws-previewBooked">
-          {/* <!-- Row 1 --> */}
+          {/*  Row 1  */}
           {flights.length > 0 &&
-            flights.map((flight, index) => (
+            flights.map((flight) => (
               <tr className="lws-bookedTable text-black" key={flight.id}>
                 <td className="px-6 py-4">
                   <div className="flex items-center space-x-3">
@@ -34,7 +41,7 @@ const BookingList = () => {
                   <p className="lws-bookedTo">{flight.to}</p>
                 </td>
                 <td className="px-6 py-4 text-center">
-                  <p className="lws-bookedDate">{flight.date}</p>
+                  <p className="lws-bookedDate">{dateFormate(flight.date)}</p>
                 </td>
                 <td className="px-6 py-4 text-center">
                   <p className="lws-bookedGustes">{flight.guests}</p>

@@ -4,14 +4,16 @@ import React, { useState } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
 import { createFlight } from "../redux/flight/actions";
+
+// automatic id generator util function
 let flightId = 1;
 const idGenerator = () => {
   return flightId++;
 };
 const BookingForm = () => {
   const flights = useSelector((state) => state);
-  const dispatch = useDispatch();
   const [formData, setFormData] = useState({});
+  const dispatch = useDispatch();
 
   const handleChange = (e) => {
     setFormData((prev) => ({
